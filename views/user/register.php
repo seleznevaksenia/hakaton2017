@@ -46,7 +46,7 @@
                                 <input type="radio" name="role" id="radio2" value="1"> тимлид
                             </label>
                             <label class="radio-inline control-label col-xs-3">
-                                <input type="radio" name="role" id="radio3" value="2"> работник
+                                <input type="radio" name="role" id="radio3" value="2" checked> работник
                             </label>
                             </div>
 
