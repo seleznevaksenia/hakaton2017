@@ -116,9 +116,9 @@ class User
     {
             $db = Db::getConnection();
 
-            $sql = "UPDATE user SET user_name = :user_name, password = :password WHERE id = :id";
+            $sql = "UPDATE user SET name = :name, password = :password WHERE id = :id";
             $result = $db->prepare($sql);
-            $result -> bindParam(':user_name',$name, PDO::PARAM_STR);
+            $result -> bindParam(':name',$name, PDO::PARAM_STR);
             $result -> bindParam(':password',$password, PDO::PARAM_STR);
             $result -> bindParam(':id',$id, PDO::PARAM_INT);         //$result->setFetchMode(PDO::FETCH_ASSOC);
            return $result-> execute();
