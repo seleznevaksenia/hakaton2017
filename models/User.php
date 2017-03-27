@@ -99,8 +99,6 @@ class User
     }
     public static function getUserById($id)
     {
-
-
         if ($id) {
             $db = Db::getConnection();
             $sql = 'SELECT * FROM user WHERE id = :id';

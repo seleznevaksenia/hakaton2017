@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-4 col-sm-offset-4 padding-right">
+            <div class="col-sm-6 col-sm-offset-3 padding-right">
                 
                 <?php if ($result): ?>
                     <p>Данные отредактированы!</p>
@@ -19,6 +19,7 @@
 
                     <div class="signup-form"><!--sign up form-->
                         <h2>Редактирование данных</h2>
+						<div class="col-sm-10 col-sm-offset-1 padding-right">
                         <form action="#" method="post">
                             <p>Имя:</p>
                             <input type="text" name="name" placeholder="Имя" value="<?php echo $name; ?>"/>
@@ -28,6 +29,7 @@
                             <br/>
                             <input type="submit" name="submit" class="btn btn-default" value="Сохранить" />
                         </form>
+						</div>
                     </div><!--/sign up form-->
                 
                 <?php endif; ?>

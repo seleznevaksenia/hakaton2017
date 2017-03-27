@@ -1,12 +1,12 @@
 <?php include ROOT . '/views/layouts/header.php'; ?>
 
-<section>
+<section class="main">
     <div class="container">
         <div class="row">
 
             <div class="col-sm-4 col-sm-offset-4 padding-right">
                     <?php if (isset($errors) && is_array($errors)): ?>
-                        <ul>
+                        <ul class="errorlist">
                             <?php foreach ($errors as $error): ?>
                                 <li> - <?php echo $error; ?></li>
                             <?php endforeach; ?>
@@ -14,29 +14,22 @@
                     <?php endif; ?>
 
                     <div class="signup-form"><!--sign up form-->
-                        <h2>Вход на сайт</h2>
-                        <form  class="form-horizontal" method="post">
-                                <div class="form-group">
-                                    <label for="inputEmail" class="control-label col-xs-2">Логин</label>
-                                    <div class="col-xs-10">
-                                        <input type="text" class="form-control" id="inputEmail" placeholder="Введите имя"  name="name">
-                                    </div>
+                        <h2>Вход</h2>
+                        <form method="post">
+                                <div class="input-field">
+                                    <input type="text" class="form-control" id="inputEmail" name="name">
+                                    <label for="inputEmail">Логин</label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputPassword" class="control-label col-xs-2">Пароль</label>
-                                    <div class="col-xs-10">
-                                        <input type="password" class="form-control" id="inputPassword" placeholder="Пароль"  name="password">
-                                    </div>
+                                <div class="input-field">
+                                    <input type="password" class="form-control" id="inputPassword" name="password">
+                                    <label for="inputPassword">Пароль</label>
                                 </div>
+                            <p>
+                                <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+                                <label for="filled-in-box">Запомнить</label>
+                            </p>
                                 <div class="form-group">
-                                    <div class="col-xs-offset-2 col-xs-10">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox"> Запомнить</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-offset-2 col-xs-10">
+                                    <div class="col-xs-offset-3 col-xs-10">
                                         <button type="submit" name="submit" class="btn btn-primary">Войти</button>
                                     </div>
                                 </div>
