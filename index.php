@@ -10,6 +10,8 @@ session_start();
 
 // Подключение файлов системы
 define('ROOT', dirname(__FILE__));
+define('img_dir', ROOT.'/template/images/captcha/background/');
+define('font_dir',ROOT.'/template/images/captcha/font/verdana.ttf');
 require_once(ROOT.'/components/Autoload.php');
 
 
