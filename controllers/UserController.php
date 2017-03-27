@@ -20,7 +20,6 @@ class UserController
                 $password = $_POST['password'];
                 $role = $_POST['role'];
                 $errors = false;
-                //echo print_r($errors).'<br>';
                 if (!User::checkName($name)) {
                     $errors[] = 'Имя не должно быть короче 2-х символов';
                 }
@@ -35,7 +34,6 @@ class UserController
                 if (!User::checkpasswordRepeat($password, $passwordRepeat)) {
                     $errors[] = 'Пароли не совпадают';
                 }
-                //echo print_r($errors);
                 if ($errors == false) {
                     $result = User::register($name, $password, $role);
                     if ($result) {
@@ -94,8 +92,9 @@ class UserController
 
     public function actionLogout()
     {
-        //session_start();
+        unset($_SESSION['role']);
         unset($_SESSION['user']);
+
 
         header("Location:/");
     }

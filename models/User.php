@@ -90,7 +90,7 @@ class User
         header("Location:/user/login");
     }
     public static function isGuest(){
-        //session_start();
+
        if(isset($_SESSION['user']))
         {
             return false;
