@@ -35,6 +35,9 @@ class UserController
                 if (!User::checkpasswordRepeat($password, $passwordRepeat)) {
                     $errors[] = 'Пароли не совпадают';
                 }
+                if(!User::checkCaptcha()){
+                    $errors[] = 'Каптча введена не верно';
+                }
                 if ($errors == false) {
                     $result = User::register($name, $password, $role);
                     if ($result) {
@@ -96,9 +99,23 @@ class UserController
         unset($_SESSION['role']);
         unset($_SESSION['user']);
 
-
         header("Location:/");
     }
+    //Сохраняем капчу в сессию
+    public static function actionCaptcha(){
+        $captcha = User::generateCode();
+        $_SESSION['captcha']=$captcha;
+        return $captcha;
+
+    }
+
+    // Выводим изображение
+    public static function actionOutput(){
+        $code = self::actionCaptcha();
+        User::generateImage($code);
+        return true;
+    }
+
 }
 
 
