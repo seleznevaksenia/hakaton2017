@@ -5,6 +5,7 @@ class UserController
 
     public function actionRegister()
     {
+
         $name = '';
         $password = '';
         $passwordRepeat = '';

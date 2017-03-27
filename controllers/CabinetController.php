@@ -18,6 +18,7 @@ class CabinetController
         // Получаем информацию о пользователе из БД
         $user = User::getUserById($userId);
 
+        $tasks = Task::getTasks();
         // Подключаем вид
         require_once(ROOT . '/views/cabinet/index.php');
         return true;
