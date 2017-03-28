@@ -155,7 +155,6 @@ class User
             $x+=15;
             $letter=substr($code, $i, 1);
             imagettftext ($im, $font_size, rand(2, 4), $x, rand(50, 55), $color, font_dir, $letter);
-
         }
 
         for ($i=0; $i<$linenum; $i++)

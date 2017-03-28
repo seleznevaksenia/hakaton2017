@@ -52,11 +52,11 @@
                             </div>
                     </div>
                     <img src="" id='capcha-image'>
-                    <a href="javascript:void(0);" onclick="document.getElementById('capcha-image').src='/user/output';return false;" id="new" >Обновить капчу</a>
+                    <a href="#" onclick="$('#capcha-image').attr('src', '/user/output');return false;" id="new" >Обновить картинку</a>
 
                     <div class="input-field">
                         <input class="form-control" type="text" name="сaptcha" class=" form-control" id = "capcha" >
-                        <label  for="capcha">Введите каптчу</label>
+                        <label  for="capcha">Введите код на картинке</label>
                     </div>
                 </div>
                 <br/>
