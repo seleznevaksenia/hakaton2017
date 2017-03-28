@@ -3,13 +3,13 @@
 class User
 {
     public static function register($name,$password,$role) {
-        
+
         $db = Db::getConnection();
         $password = md5($password);
-        
+
         $sql = 'INSERT INTO user (name, password, role)'
-                . 'VALUES (:name, :password, :role)';
-        
+            . 'VALUES (:name, :password, :role)';
+
         $result = $db->prepare($sql);
         $result->bindParam(':name', $name, PDO::PARAM_STR);
         $result->bindParam(':password', $password, PDO::PARAM_STR);
@@ -18,7 +18,6 @@ class User
 
         return $result->execute();
     }
-    
     /**
      * Проверяет имя: не меньше, чем 2 символа
      */
@@ -34,6 +33,20 @@ class User
     public static function checkPassword($password) {
         if (strlen($password) >= 6) {
             return true;
+        }
+        return false;
+    }
+    /**
+     * Проверяет капчу
+     */
+    public static function checkCaptcha()
+    {
+        if(isset($_POST['сaptcha'])){
+            if ($_POST['сaptcha'] == $_SESSION['captcha'])
+            {
+                return true;
+            }
+            else {false;}
         }
         return false;
     }
@@ -55,7 +68,7 @@ class User
         }
         return false;
     }
-    
+
 
     public static function checkUserData($name,$password) {
 
@@ -82,7 +95,7 @@ class User
         $_SESSION['role'] = $user['role'];
 
     }
-   public static function checkLogged(){
+    public static function checkLogged(){
         if(isset($_SESSION['user']))
         {
             return $_SESSION['user'];
@@ -91,7 +104,7 @@ class User
     }
     public static function isGuest(){
 
-       if(isset($_SESSION['user']))
+        if(isset($_SESSION['user']))
         {
             return false;
         }
@@ -112,13 +125,57 @@ class User
 
     public static function edit($id,$name,$password)
     {
-            $db = Db::getConnection();
+        $db = Db::getConnection();
 
-            $sql = "UPDATE user SET name = :name, password = :password WHERE id = :id";
-            $result = $db->prepare($sql);
-            $result -> bindParam(':name',$name, PDO::PARAM_STR);
-            $result -> bindParam(':password',$password, PDO::PARAM_STR);
-            $result -> bindParam(':id',$id, PDO::PARAM_INT);         //$result->setFetchMode(PDO::FETCH_ASSOC);
-           return $result-> execute();
+        $sql = "UPDATE user SET name = :name, password = :password WHERE id = :id";
+        $result = $db->prepare($sql);
+        $result -> bindParam(':name',$name, PDO::PARAM_STR);
+        $result -> bindParam(':password',$password, PDO::PARAM_STR);
+        $result -> bindParam(':id',$id, PDO::PARAM_INT);         //$result->setFetchMode(PDO::FETCH_ASSOC);
+        return $result-> execute();
+    }
+    public static function generateImage($code)
+    {
+
+        header("Content-Type:image/png");
+        $linenum = rand(3, 7);
+        $img_arr = array("1.png","2.png","3.png");
+        $font_size = rand(20, 30);
+        $img_fn = $img_arr[rand(0, sizeof($img_arr)-1)];
+        $im = imagecreatefrompng (img_dir . $img_fn);
+        for ($i=0; $i<$linenum; $i++)
+        {
+            $color = imagecolorallocate($im, rand(0, 150), rand(0, 100), rand(0, 150));
+            imageline($im, rand(0, 20), rand(1, 50), rand(150, 180), rand(1, 50), $color);
+        }
+        $color = imagecolorallocate($im, rand(0, 200), 0, rand(0, 200));
+        $x = rand(0, 35);
+
+        for($i = 0; $i < strlen($code); $i++) {
+            $x+=15;
+            $letter=substr($code, $i, 1);
+            imagettftext ($im, $font_size, rand(2, 4), $x, rand(50, 55), $color, font_dir, $letter);
+        }
+
+        for ($i=0; $i<$linenum; $i++)
+        {
+            $color = imagecolorallocate($im, rand(0, 255), rand(0, 200), rand(0, 255));
+            imageline($im, rand(0, 20), rand(1, 50), rand(150, 180), rand(1, 50), $color);
+        }
+        ImagePNG ($im);
+        ImageDestroy ($im);
+    }
+
+
+    public static function generateCode()
+    {
+        $chars = 'abdefhknrstyz23456789';
+        $length = rand(4, 7);
+        $numChars = strlen($chars);
+        $str = '';
+        for ($i = 0; $i < $length; $i++) {
+            $str .= substr($chars, rand(1, $numChars) - 1, 1);
+        }
+        return $str;
     }
 }

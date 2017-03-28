@@ -51,20 +51,27 @@
                                 </p>
                             </div>
                     </div>
+                    <img src="" id='capcha-image'>
+                    <a href="#" onclick="$('#capcha-image').attr('src', '/user/output');return false;" id="new" >Обновить картинку</a>
 
-                    <br/>
-                    <div class="form-group">
-                        <div class="col-xs-offset-2 col-xs-5">
-                            <input type="submit" name="submit" class="btn btn-primary" value="Регистрация">
-                        </div>
+                    <div class="input-field">
+                        <input class="form-control" type="text" name="сaptcha" class=" form-control" id = "capcha" >
+                        <label  for="capcha">Введите код на картинке</label>
                     </div>
-                    </form>
-                </div><!--/sign up form-->
+                </div>
+                <br/>
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-5">
+                        <input type="submit" name="submit" class="btn btn-primary" value="Регистрация">
+                    </div>
+                </div>
+                </form>
+            </div><!--/sign up form-->
 
-                <?php endif; ?>
-                <br/>
-                <br/>
-            </div>
+            <?php endif; ?>
+            <br/>
+            <br/>
+        </div>
         </div>
         </div>
     </section>

@@ -7,9 +7,10 @@ return array(
     'user/register' => 'user/register',
     'user/login' => 'user/login',
     'user/logout' => 'user/logout',
+    'user/output' => 'user/output',
     'cabinet/edit' => 'cabinet/edit',
     'cabinet' => 'cabinet/index',
-       // О магазине
+    // О магазине
     'contacts' => 'site/contact',
     'about' => 'site/about',
     // Главная страница
