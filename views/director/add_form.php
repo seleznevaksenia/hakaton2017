@@ -1,6 +1,9 @@
 <?php include ROOT . '/views/layouts/header.php'; ?>
 
 <div class="container">
+
+<h4><?= $result ?></h4>
+
 <form method="post" action="">
         <div class="input-field">
             <input type="text" class="form-control" id="task_name" name="task_name" required>

@@ -1,28 +1,36 @@
 <?php include ROOT . '/views/layouts/header.php'; ?>
 
 <div class="container">
-<form method="post" action="">
-        <div class="input-field">
-            <input type="text" class="form-control" id="task_name" name="task_name" required>
-            <label for="task_name">Название</label>
+
+    <h4><?= $result ?></h4>
+
+    <form method="post" action="" enctype="multipart/form-data">
+        <div class="input-field col-sm-6">
+            <input class="form-control" name="userfile" type="file" required>
         </div>
-        <div class="input-field">
-            <input type="text" class="form-control" id="description" name="description">
-            <label for="description">Описание</label>
-        </div>
-        <label for="deadline">Дедлайн</label>
-        <div class='input-group date' id='datetimepicker1'>
-            <input type='text' class="form-control" name="deadline" id="deadline"/>
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-offset-3 col-xs-10">
-                <button type="submit" name="submit" class="btn btn-primary">Отправить</button>
-            </div>
-        </div>
-</form>
+        <button type="submit" name="submit" class="btn btn-primary">Отправить</button>
+    </form>
+
+    <br>
+
+    <p>Требования к содержимому файла: </p>
+        <ol>
+            <li>Предпочтительный формат файла - txt</li>
+            <li>Каждая часть задания отмечается соответствующей меткой и занимает только одну строку</li>
+            <li>Обязательно к заполнению только название</li>
+            <li>Описание и дедлайн можно пропустить</li>
+            <li>Задания разделяются пустой строкой (несколькими)</li>
+            <li>Между пунктами одного задания не могут находиться пустые строки</li>
+            <li>Формат дедлайна строгий: year-month-day hh:mm:ss</li>
+        </ol>
+        <p>Пример оформления задания: </p>
+        <pre>
+Task: загрузить задания из файла
+Description: заданий в файле несколько
+Deadline: 2017-03-30 12:00:00
+
+Task: посмотреть результат
+        </pre>
 </div>
 
 <?php include ROOT . '/views/layouts/footer.php'; ?>
