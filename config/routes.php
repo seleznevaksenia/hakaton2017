@@ -2,6 +2,7 @@
 
 return array(
 
+    'director/add_from_file' => 'director/addFromFile',
     // Пользователь:
     'user/register' => 'user/register',
     'user/login' => 'user/login',

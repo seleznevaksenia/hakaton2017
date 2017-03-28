@@ -1,3 +1,4 @@
+
 -- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
@@ -29,11 +30,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `task` (
   `id_task` int(11) UNSIGNED NOT NULL,
   `task_name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `description` text NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
-  `deadline` datetime NOT NULL,
+  `deadline` datetime NULL,
   `complete` enum('0','1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX `user_id` ON `task`(`user_id`);
 
 --
 -- Dumping data for table `task`
@@ -101,3 +104,4 @@ ALTER TABLE `user`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
