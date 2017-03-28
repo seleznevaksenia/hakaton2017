@@ -7,9 +7,11 @@ ini_set('display_errors',1);
 error_reporting(E_ALL);
 
 session_start();
-
+//ррррр
 // Подключение файлов системы
 define('ROOT', dirname(__FILE__));
+define('img_dir', ROOT.'/template/images/captcha/background/');
+define('font_dir',ROOT.'/template/images/captcha/font/verdana.ttf');
 require_once(ROOT.'/components/Autoload.php');
 
 
