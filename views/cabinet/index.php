@@ -12,6 +12,16 @@
 
             </div>
         </div>
+
+        <?php if (User::isDirector()) { ?>
+            <div class="container">
+                <div class="row">
+                <a href="/director/create_task" class="btn btn-default back"><i class="fa fa-plus"></i> Create task</a>
+                <a href="/director/add_from_file" class="btn btn-default back"><i class="fa fa-plus"></i> Add tasks from file</a>
+                </div>
+            </div>
+        <?php } ?>
+
         <div class="container">
             <table class="table table-bordered table-responsive">
                 <thead>

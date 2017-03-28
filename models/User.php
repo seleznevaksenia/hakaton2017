@@ -178,4 +178,21 @@ class User
         }
         return $str;
     }
+
+    public static function isDirector()
+    {
+        $userId = User::checkLogged();
+        $user = User::getUserById($userId);
+
+        if ($user['role'] == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function checkDirector() {
+        if (!User::isDirector()) {
+            die('Access denied');
+        }
+    }
 }

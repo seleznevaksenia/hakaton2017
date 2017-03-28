@@ -131,4 +131,22 @@ class Task
         //return $numberInsertedTasks;
     }
 
+    public static function addTask($task) {
+        $db = Db::getConnection();
+
+        $sql = 'INSERT INTO `task` (`task_name`, `description`, `deadline`) '
+            . 'VALUES (:task_name, :description, :deadline)';
+        $result = $db->prepare($sql);
+        
+        $result->bindParam(':task_name', $task['task_name'], PDO::PARAM_STR);
+        $result->bindParam(':description', $task['description'], PDO::PARAM_STR);
+        $result->bindParam(':deadline', $task['deadline'], PDO::PARAM_STR);  
+
+        if ($result->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
