@@ -40,6 +40,8 @@ class Router
      */
     public function run()
     {
+        /*//отключаем ошибки второй вариант, чтоб не лазить в ini
+        ini_set('display_errors','Off');*/
         // Получаем строку запроса
         $uri = $this->getURI();
 
@@ -75,6 +77,14 @@ class Router
 
                     // Создать объект, вызвать метод (т.е. action)
                     $controllerObject = new $controllerName;
+                    //Обработка ошибки
+                    try {
+                        error_reporting(E_ALL ^ E_WARNING);
+                        $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
+                        throw new Exception($result);
+                    }catch(Exception $e){
+
+                    }
 
                     /* Вызываем необходимый метод ($actionName) у определенного
                      * класса ($controllerObject) с заданными ($parameters) параметрами
@@ -88,7 +98,9 @@ class Router
 
                 }
             }
-
+            /*//включаем ошибки второй вариант
+        ini_set('display_errors','On');
+        error_reporting('E_ALL');*/
 
     }
 
