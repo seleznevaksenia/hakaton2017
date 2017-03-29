@@ -9,7 +9,7 @@ class DirectorController
 
         if (isset($_POST['submit'])) {
 
-			$pathToFile = $_SERVER['DOCUMENT_ROOT'] . '\uploads\data.txt';
+			$pathToFile = $_SERVER['DOCUMENT_ROOT'] . 'data.txt';
 
 			if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
                 move_uploaded_file($_FILES["userfile"]["tmp_name"], $pathToFile);
