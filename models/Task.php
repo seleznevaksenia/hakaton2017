@@ -23,6 +23,29 @@ class Task
         }
         return $tasks;
     }
+    public static function getTasksByUser($userid){
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Получение и возврат результатов
+        $sql = 'SELECT * FROM task WHERE user_id = :userid ORDER BY id_task ASC';
+        $result = $db->prepare($sql);
+        $result->bindParam(':userid', $userid, PDO::PARAM_INT);
+        $result->execute();
+
+        $userTasks = array();
+        $i = 0;
+        while ($row = $result->fetch()) {
+            $userTasks[$i]['id_task'] = $row['id_task'];
+            $userTasks[$i]['task_name'] = $row['task_name'];
+            $userTasks[$i]['description'] = $row['description'];
+            $userTasks[$i]['deadline'] = $row['deadline'];
+            $userTasks[$i]['complete'] = $row['complete'];
+            $i++;
+
+        }
+        return $userTasks;
+    }
 
     public static function getTasksFromFile($path) {
 

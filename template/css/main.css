@@ -30,6 +30,9 @@ a:focus {
     outline:none;
     outline-offset: 0;
 }
+p{
+    text-align: center;
+}
 
 a {
     -webkit-transition: 300ms;
