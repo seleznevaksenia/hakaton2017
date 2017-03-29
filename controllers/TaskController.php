@@ -37,6 +37,7 @@ class TaskController
     {
         // Проверка доступа
         //   self::checkAdmin();
+        User::checkTeamlead();
 
 
         $task = Task::getTasksById($id);
@@ -67,7 +68,8 @@ class TaskController
     public function actionUpdatetask()
     {
         // Проверка доступа
-        //   self::checkAdmin();
+        User::checkLogged();
+
 
         // Обработка формы
         if (isset($_POST['id'])) {
@@ -92,7 +94,7 @@ class TaskController
     public function actionDelete($id)
     {
         // Проверка доступа
-        //   self::checkAdmin();
+        User::checkTeamlead();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
