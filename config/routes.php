@@ -3,6 +3,7 @@
 return array(
 
     //task:
+    'task/updatetask/([0-9]+)' => 'task/updatetask/$1',
     'task/update/([0-9]+)' => 'task/update/$1',
     'task/delete/([0-9]+)' => 'task/delete/$1',
     'task/index/([0-9]+)' => 'task/index/$1',

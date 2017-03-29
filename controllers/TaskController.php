@@ -64,6 +64,28 @@ class TaskController
         return true;
     }
 
+    public function actionUpdatetask()
+    {
+        // Проверка доступа
+        //   self::checkAdmin();
+
+        // Обработка формы
+        if (isset($_POST['id'])) {
+            // Если форма отправлена
+            // Получаем данные из формы редактирования. При необходимости можно валидировать значения
+            $complete = $_POST['complete'];
+            $id = $_POST['id'];
+
+            // Сохраняем изменения
+            Task::updateTaskByIdComplete($id, $complete);
+
+
+            // Перенаправляем пользователя
+ //           header("Location: /cabinet/index");
+        }
+
+        return true;
+    }
     /**
      * Action для страницы "Удалить товар"
      */
