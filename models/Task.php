@@ -147,6 +147,7 @@ class Task
             //считать возможные пустые строки в начале файла
             do {	
             	$str = fgets($fp, 999);
+                $str = iconv('cp1251', 'UTF-8', $str);
             } while (empty(trim($str)) && !feof($fp));
 
             //формирование массива с заданиями
@@ -156,7 +157,6 @@ class Task
                 $deadline = false;
 
                 //в базе данные хранятся в UTF-8, а .txt по-умолчанию сохраняется в другой кодировке
-                $str = iconv('cp1251', 'UTF-8', $str);
                 //считывать до пустой строки (до конца задания)
                 do {
                     //если найдена в строке пометка, 
@@ -174,6 +174,7 @@ class Task
                         }
                     }
                     $str = fgets($fp, 999);
+                    $str = iconv('cp1251', 'UTF-8', $str);
                 } while (!empty(trim($str)));
 
                 //значение task_name обязательно, остальные - нет
@@ -192,6 +193,9 @@ class Task
         }
 
         fclose($fp);
+
+        print_r($tasks); die();
+
         return $tasks;
     }
 
