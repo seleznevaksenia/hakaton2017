@@ -15,8 +15,6 @@
         <script src="/template/js/jquery.js"></script>
         <script src="/template/js/materialize.min.js"></script>
         <script src="/template/js/main.js"></script>
-
-        <link rel="stylesheet" href="/template/css/bootstrap-datetimepicker.min.css" />
     </head><!--/head-->
 
     <body>
