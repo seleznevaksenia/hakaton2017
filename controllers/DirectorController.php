@@ -9,13 +9,15 @@ class DirectorController
 
 		if (isset($_POST['submit'])) {
 
-			$pathToFile = '\uploads\data.txt';
+			$pathToFile = $_SERVER['DOCUMENT_ROOT'] . '\uploads\data.txt';
 
 			if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
-                move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . $pathToFile);
+                move_uploaded_file($_FILES["userfile"]["tmp_name"], $pathToFile);
             }
 
-			$tasks = Task::getTasksFromFile(ROOT . $pathToFile);
+			$tasks = Task::getTasksFromFile($pathToFile);
+
+            unlink($pathToFile);
 
 			if (!empty($tasks)) {
 				if (Task::addTasks($tasks)) {
