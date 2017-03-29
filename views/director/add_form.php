@@ -10,7 +10,7 @@
             <label for="task_name">Название</label>
         </div>
         <div class="input-field">
-            <input type="text" class="form-control" id="description" name="description">
+            <textarea class="materialize-textarea" id="description" name="description"></textarea>
             <label for="description">Описание</label>
         </div>
         <label for="deadline">Дедлайн</label>
