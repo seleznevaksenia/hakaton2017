@@ -27,9 +27,9 @@ class Task
     public static function getTasksFromFile($path) {
 
         //эти пометки ставит пользователь в файле перед каждой соответствующей строкой
-        //задания разделяются пустой строкой
+        //задания разделяются пустой строкой (несколькими)
+        //между пунктами одного задания не могут находиться пустые строки
         //формат дедлайна строгий: year-month-day hh:mm:ss
-
         $patternTask = 'Task: ';
         $patternDescription = 'Description: ';
         $patternDeadline = 'Deadline: ';
@@ -41,47 +41,49 @@ class Task
 
             $i=0;
 
+            //считать возможные пустые строки в начале файла
+            do {
+                $str = fgets($fp, 999);
+            } while (empty(trim($str)) && !feof($fp));
+
             //формирование массива с заданиями
-            while (!feof($fp)) {
+            do {
                 $task_name = false;
                 $description = false;
                 $deadline = false;
 
-                //если найдена в строке пометка, 
-                //остается только текст после нее (значение) до конца строки 
-                //и записывается в массив под соответствующим ключем
-
-                $str = fgets($fp, 999);
-                if (preg_match("/" . $patternTask . "/",$str)) {
-                    $task_name = str_replace($patternTask, "", stristr($str, $patternTask));
-                }
-
-                $str = fgets($fp, 999);
-                if (preg_match("/" . $patternDescription . "/",$str)) {
-                    $description = str_replace($patternDescription, "", stristr($str, $patternDescription));
-                }
-
-                $str = fgets($fp, 999);
-                if (preg_match("/" . $patternDeadline . "/",$str)) {
-                    $deadline = str_replace($patternDeadline, "", stristr($str, $patternDeadline));
-                }
+                //считывать до пустой строки (до конца задания)
+                do {
+                    //если найдена в строке пометка, 
+                    //остается только текст после нее (значение) до конца строки 
+                    //и записывается под соответствующим ключем
+                    if (preg_match("/" . $patternTask . "/",$str)) {
+                        $task_name = str_replace($patternTask, "", stristr($str, $patternTask));
+                    } else {
+                        if (preg_match("/" . $patternDescription . "/",$str)) {
+                            $description = str_replace($patternDescription, "", stristr($str, $patternDescription));
+                        } else {
+                            if (preg_match("/" . $patternDeadline . "/",$str)) {
+                                $deadline = str_replace($patternDeadline, "", stristr($str, $patternDeadline));
+                            }
+                        }
+                    }
+                    $str = fgets($fp, 999);
+                } while (!empty(trim($str)));
 
                 //значение task_name обязательно, остальные - нет
                 if ($task_name) {
                     $tasks[$i] = array('task_name' => $task_name);
+
                     if ($description) {
                         $tasks[$i]['description'] = $description;
                     }
                     if ($deadline) {
                         $tasks[$i]['deadline'] = $deadline;
                     }
+                    $i++;
                 }
-
-                //считывание пустой строки между заданиями
-                $str = fgets($fp, 999);
-
-                $i++;
-            }
+            } while (!feof($fp));
         }
 
         fclose($fp);
@@ -129,6 +131,24 @@ class Task
         //но хочется вывести количество добавленных заданий
         //$numberInsertedTasks = $db->rowCount();
         //return $numberInsertedTasks;
+    }
+
+    public static function addTask($task) {
+        $db = Db::getConnection();
+
+        $sql = 'INSERT INTO `task` (`task_name`, `description`, `deadline`) '
+            . 'VALUES (:task_name, :description, :deadline)';
+        $result = $db->prepare($sql);
+        
+        $result->bindParam(':task_name', $task['task_name'], PDO::PARAM_STR);
+        $result->bindParam(':description', $task['description'], PDO::PARAM_STR);
+        $result->bindParam(':deadline', $task['deadline'], PDO::PARAM_STR);  
+
+        if ($result->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

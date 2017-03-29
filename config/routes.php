@@ -3,6 +3,8 @@
 return array(
 
     'director/add_from_file' => 'director/addFromFile',
+    'director/create_task' => 'director/createTask',
+    'director' => 'director/index',
     // Пользователь:
     'user/register' => 'user/register',
     'user/login' => 'user/login',
