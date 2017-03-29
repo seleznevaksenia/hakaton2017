@@ -2,40 +2,42 @@
 
 class DirectorController
 {
-	public function actionAddFromFile()
-	{
-		User::checkDirector();
-		$result = '';
+    public function actionAddFromFile()
+    {
+        User::checkDirector();
+        $result = '';
 
-		if (isset($_POST['submit'])) {
+        if (isset($_POST['submit'])) {
 
-			$pathToFile = '\uploads\data.txt';
+            $pathToFile = $_SERVER['DOCUMENT_ROOT'] . 'data.txt';
 
-			if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
-                move_uploaded_file($_FILES["userfile"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . $pathToFile);
+            if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
+                move_uploaded_file($_FILES["userfile"]["tmp_name"], $pathToFile);
             }
 
-			$tasks = Task::getTasksFromFile(ROOT . $pathToFile);
+            $tasks = Task::getTasksFromFile($pathToFile);
 
-			if (!empty($tasks)) {
-				if (Task::addTasks($tasks)) {
-					$result = 'Задания добавлены!';
-				} else {
-					$result = 'Ошибка в добавлении данных';
-				}
-			} else {
-				$result = 'Ошибка в чтении данных из файла';
-			}
-		}
+            unlink($pathToFile);
 
-		require_once(ROOT . '/views/director/add_file.php');
-		return true;
-	}
+            if (!empty($tasks)) {
+                if (Task::addTasks($tasks)) {
+                    $result = 'Задания добавлены!';
+                } else {
+                    $result = 'Ошибка в добавлении данных';
+                }
+            } else {
+                $result = 'Ошибка в чтении данных из файла';
+            }
+        }
 
-	public function actionCreateTask()
+        require_once(ROOT . '/views/director/add_file.php');
+        return true;
+    }
+
+    public function actionCreateTask()
     {
-    	User::checkDirector();
-    	$result = '';
+        User::checkDirector();
+        $result = '';
 
         if (isset($_POST['submit'])) {
             $task['task_name'] = $_POST['task_name'];
@@ -50,22 +52,22 @@ class DirectorController
 
             //замена возможной пустой строки на null
             if (empty($task['description'])) {
-            	$task['description'] = null;
+                $task['description'] = null;
             }
             if (empty($task['deadline'])) {
-            	$task['deadline'] = null;
+                $task['deadline'] = null;
             }
 
             if ($errors == false) {
                 if (Task::addTask($task)) {
-                	$result = 'Задание добавлено!';
+                    $result = 'Задание добавлено!';
                 } else {
-					$result = 'Ошибка в добавлении данных';
-				}
+                    $result = 'Ошибка в добавлении данных';
+                }
             }
         }
 
         require_once(ROOT . '/views/director/add_form.php');
-		return true;
+        return true;
     }
 }
