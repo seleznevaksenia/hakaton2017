@@ -20,7 +20,7 @@
                     <div class="signup-form"><!--sign up form-->
                         <h2>Редактирование данных</h2>
 						<div class="col-sm-10 col-sm-offset-1 padding-right">
-                        <form action="#" method="post">
+                        <form action="" method="post">
                             <p>Имя:</p>
                             <input type="text" name="name" placeholder="Имя" value="<?php echo $name; ?>"/>
                             

@@ -13,8 +13,12 @@
             <p>Вы действительно хотите удалить этот задание?</p>
 
             <form method="post">
-                <input type="submit" name="submit" value="Удалить" />
-            </form>
+                <div class="form-group">
+                    <div class="col-xs-offset-5 col-xs-2">
+                        <button type="submit" name="submit" class="btn btn-primary">Удалить</button>
+                    </div>
+                </div>
+             </form>
 
         </div>
     </div>

@@ -37,6 +37,7 @@ class TaskController
     {
         // Проверка доступа
         //   self::checkAdmin();
+        User::checkTeamlead();
 
 
         $task = Task::getTasksById($id);
@@ -56,7 +57,7 @@ class TaskController
 
 
             // Перенаправляем пользователя
-            header("Location: /cabinet/index");
+            header("Location: /cabinet");
         }
 
         // Подключаем вид
@@ -67,7 +68,8 @@ class TaskController
     public function actionUpdatetask()
     {
         // Проверка доступа
-        //   self::checkAdmin();
+        User::checkLogged();
+
 
         // Обработка формы
         if (isset($_POST['id'])) {
@@ -81,7 +83,7 @@ class TaskController
 
 
             // Перенаправляем пользователя
- //           header("Location: /cabinet/index");
+            header("Location: /cabinet");
         }
 
         return true;
@@ -92,7 +94,7 @@ class TaskController
     public function actionDelete($id)
     {
         // Проверка доступа
-        //   self::checkAdmin();
+        User::checkTeamlead();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -101,7 +103,7 @@ class TaskController
             Task::deleteTaskById($id);
 
             // Перенаправляем пользователя
-            header("Location: /cabinet/index");
+            header("Location: /cabinet");
         }
 
         // Подключаем вид
