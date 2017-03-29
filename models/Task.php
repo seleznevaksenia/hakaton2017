@@ -46,6 +46,65 @@ class Task
         }
         return $userTasks;
     }
+    public static function getTasksById($id){
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Получение и возврат результатов
+        $sql = 'SELECT * FROM task WHERE id_task = :id_task';
+        $result = $db->prepare($sql);
+        $result->bindParam(':id_task', $id, PDO::PARAM_INT);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        // Выполнение коменды
+        $result->execute();
+
+        // Получение и возврат результатов
+        return $result->fetch();
+    }
+    public static function deleteTaskById($id)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = 'DELETE FROM task WHERE id_task = :id';
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        return $result->execute();
+    }
+    public static function updateTaskById($id, $options)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = "UPDATE task
+            SET 
+                task_name = :task_name, 
+                description = :description, 
+                user_id = :user_id, 
+                deadline = :deadline, 
+                complete = :complete
+                
+            WHERE id_task = :id";
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':task_name', $options['task_name'], PDO::PARAM_STR);
+        $result->bindParam(':description', $options['description'], PDO::PARAM_STR);
+        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
+        $result->bindParam(':deadline', $options['deadline'], PDO::PARAM_STR);
+        $result->bindParam(':complete', $options['complete'], PDO::PARAM_INT);
+
+
+
+        return $result->execute();
+    }
+
 
     public static function getTasksFromFile($path) {
 

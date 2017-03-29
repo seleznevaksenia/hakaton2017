@@ -34,7 +34,11 @@
                     <?php endif; ?>
                     <th>Deadline</th>
                     <th>Status</th>
-                    <th>хз зачем</th>
+
+<?php if ($_SESSION['role'] != 2): ?>
+                    <th></th>
+                    <th></th>
+<?php endif; ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,11 +46,12 @@
                     <?php if ($_SESSION['role'] == 2): ?>
                         <?php foreach ($userTasks as $task): ?>
                             <tr>
-                                <th><?= $task['task_name'] ?></th>
+                                <th><a href="/task/index/<?php echo $task['id_task']; ?>" title="Редактировать"><?= $task['task_name'] ?></a></th>
                                 <th><?= $task['description'] ?></th>
                                 <th><?= $task['deadline'] ?></th>
                                 <th><?= $task['complete'] ?></th>
-                                <th><?= $task['id_task'] ?></th>
+
+
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -59,18 +64,19 @@
                     <?php if ($_SESSION['role'] != 2): ?>
                         <?php foreach ($tasks as $task): ?>
                             <tr>
-                                <th><?= $task['task_name'] ?></th>
+                                <th><a href="/task/index/<?php echo $task['id_task']; ?>" title="Редактировать"><?= $task['task_name'] ?></a></th>
                                 <th><?= $task['description'] ?></th>
                                 <th><?= $task['user_id'] ?></th>
                                 <th><?= $task['deadline'] ?></th>
                                 <th><?= $task['complete'] ?></th>
-                                <th><?= $task['id_task'] ?></th>
+                                <th><a href="/task/update/<?php echo $task['id_task']; ?>" title="Редактировать"><i class="fa fa-pencil-square-o"></i></a></th>
+                                <th><a href="/task/delete/<?php echo $task['id_task']; ?>" title="Удалить"><i class="fa fa-times"></i></a></th>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 <?php else: ?>
                     <tr>
-                        <th colspan="6"><p>Простой рабов не рентабельно, срочно нужны новые проекты!</p></th>
+                        <th colspan="6"><p>Простой рабов - не рентабельно, срочно нужны новые проекты!</p></th>
                     </tr>
                 <?php endif; ?>
                 </tbody>
