@@ -41,8 +41,8 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php if ($_SESSION['role'] == 2): ?>
                 <?php if (!empty($userTasks)): ?>
-                    <?php if ($_SESSION['role'] == 2): ?>
                         <?php foreach ($userTasks as $task): ?>
                             <tr>
                                 <th><a href="/task/index/<?php echo $task['id_task']; ?>" title="Редактировать"><?= $task['task_name'] ?></a></th>
@@ -54,14 +54,14 @@
 
                             </tr>
                         <?php endforeach; ?>
-                    <?php endif; ?>
                     <?php else: ?>
-                    <tr>
-                        <th colspan="5"><p>Заданий нет, сегодня свободен</p></th>
-                    </tr>
+                        <tr>
+                            <th colspan="5"><p>Заданий нет, сегодня свободен</p></th>
+                        </tr>
+                    <?php endif; ?>
                 <?php endif; ?>
+                <?php if ($_SESSION['role'] != 2): ?>
                 <?php if (!empty($tasks)): ?>
-                    <?php if ($_SESSION['role'] != 2): ?>
                         <?php foreach ($tasks as $task): ?>
                             <tr>
                                 <th><a href="/task/index/<?php echo $task['id_task']; ?>" title="Редактировать"><?= $task['task_name'] ?></a></th>
@@ -74,11 +74,11 @@
                                 <th><a href="/task/delete/<?php echo $task['id_task']; ?>" title="Удалить"><i class="fa fa-times"></i></a></th>
                             </tr>
                         <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <th colspan="6"><p>Простой рабов - не рентабельно, срочно нужны новые проекты!</p></th>
+                        </tr>
                     <?php endif; ?>
-                <?php else: ?>
-                    <tr>
-                        <th colspan="6"><p>Простой рабов - не рентабельно, срочно нужны новые проекты!</p></th>
-                    </tr>
                 <?php endif; ?>
                 </tbody>
             </table>
