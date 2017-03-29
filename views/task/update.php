@@ -13,7 +13,7 @@
 
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="login-form">
-                    <form action="#" method="post">
+                    <form action="" method="post">
                         <div class="input-field">
                             <input type="text" class="form-control" id="task_name" name="task_name"
                                    value="<?= $task['task_name'] ?>">

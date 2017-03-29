@@ -56,7 +56,7 @@ class TaskController
 
 
             // Перенаправляем пользователя
-            header("Location: /cabinet/index");
+            header("Location: /cabinet");
         }
 
         // Подключаем вид
@@ -81,7 +81,7 @@ class TaskController
 
 
             // Перенаправляем пользователя
- //           header("Location: /cabinet/index");
+            header("Location: /cabinet");
         }
 
         return true;
@@ -101,7 +101,7 @@ class TaskController
             Task::deleteTaskById($id);
 
             // Перенаправляем пользователя
-            header("Location: /cabinet/index");
+            header("Location: /cabinet");
         }
 
         // Подключаем вид
