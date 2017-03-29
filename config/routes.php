@@ -24,5 +24,4 @@ return array(
     'about' => 'site/about',
     // Главная страница
     '' => 'user/login', // actionIndex в SiteController
-
 );
