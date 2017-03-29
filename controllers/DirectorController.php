@@ -9,7 +9,6 @@ class DirectorController
 
         if (isset($_POST['submit'])) {
 
-<<<<<<< HEAD
 			$pathToFile = $_SERVER['DOCUMENT_ROOT'] . '\uploads\data.txt';
 
 			if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
@@ -17,17 +16,6 @@ class DirectorController
             }
 
 			$tasks = Task::getTasksFromFile($pathToFile);
-
-            unlink($pathToFile);
-=======
-            $pathToFile = $_SERVER['DOCUMENT_ROOT'] . 'data.txt';
-
-            if (is_uploaded_file($_FILES["userfile"]["tmp_name"])) {
-                move_uploaded_file($_FILES["userfile"]["tmp_name"], $pathToFile);
-            }
-
-            $tasks = Task::getTasksFromFile($pathToFile);
->>>>>>> bb74bb61f3582387833840a7ece8912cdcb53070
 
             unlink($pathToFile);
 

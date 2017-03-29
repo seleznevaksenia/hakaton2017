@@ -201,9 +201,6 @@ class Task
         }
 
         fclose($fp);
-
-        print_r($tasks); die();
-
         return $tasks;
     }
 
