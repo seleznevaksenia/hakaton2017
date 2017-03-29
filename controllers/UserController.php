@@ -100,6 +100,7 @@ class UserController
         unset($_SESSION['user']);
 
         header("Location:/");
+        return true;
     }
     //Сохраняем капчу в сессию
     public static function actionCaptcha(){
@@ -116,6 +117,10 @@ class UserController
         return true;
     }
 
+    public static function actionError(){
+        require_once(ROOT . '/views/user/404.php');
+        return true;
+    }
 }
 
 

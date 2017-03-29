@@ -19,10 +19,8 @@ return array(
     'user/output' => 'user/output',
     'cabinet/edit' => 'cabinet/edit',
     'cabinet' => 'cabinet/index',
-    // О магазине
-    'contacts' => 'site/contact',
-    'about' => 'site/about',
-    // Главная страница
     '' => 'user/login', // actionIndex в SiteController
+    '^(.*)$' => 'user/error',
+
 
 );
