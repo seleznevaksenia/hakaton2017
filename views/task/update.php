@@ -13,7 +13,7 @@
 
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="login-form">
-                    <form action="#" method="post">
+                    <form action="" method="post">
                         <div class="input-field">
                             <input type="text" class="form-control" id="task_name" name="task_name"
                                    value="<?= $task['task_name'] ?>">
@@ -43,14 +43,15 @@
                                   <!-- value="<?/*= $task['user_id'] */?>"">-->
                             <label for="user_id">Разработчик</label>
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field s12">
                             <select name="complete">
-                                <option value="1" <?php if ($task['complete'] == 1) echo ' selected="selected"'; ?> >Да
+                                <option value="1" <?php if ($task['complete'] == 1) echo ' selected="selected"'; ?> >Готово
                                 </option>
-                                <option value="0" <?php if ($task['complete'] == 0) echo ' selected="selected"'; ?> >Нет</option>
+                                <option value="0" <?php if ($task['complete'] == 0) echo ' selected="selected"'; ?> >Не готово</option>
                             </select>
                             <label>Статус</label>
                         </div>
+
                         <div class="form-group">
                             <div class="col-xs-offset-3 col-xs-10">
                                 <button type="submit" name="submit" class="btn btn-primary">Отправить</button>

@@ -37,6 +37,7 @@ class TaskController
     {
         // Проверка доступа
         //   self::checkAdmin();
+        User::checkTeamlead();
 
 
         $task = Task::getTasksById($id);
@@ -56,7 +57,7 @@ class TaskController
 
 
             // Перенаправляем пользователя
-            header("Location: /cabinet/index");
+            header("Location: /cabinet");
         }
 
         // Подключаем вид
@@ -64,13 +65,36 @@ class TaskController
         return true;
     }
 
+    public function actionUpdatetask()
+    {
+        // Проверка доступа
+        User::checkLogged();
+
+
+        // Обработка формы
+        if (isset($_POST['id'])) {
+            // Если форма отправлена
+            // Получаем данные из формы редактирования. При необходимости можно валидировать значения
+            $complete = $_POST['complete'];
+            $id = $_POST['id'];
+
+            // Сохраняем изменения
+            Task::updateTaskByIdComplete($id, $complete);
+
+
+            // Перенаправляем пользователя
+            header("Location: /cabinet");
+        }
+
+        return true;
+    }
     /**
      * Action для страницы "Удалить товар"
      */
     public function actionDelete($id)
     {
         // Проверка доступа
-        //   self::checkAdmin();
+        User::checkTeamlead();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -79,7 +103,7 @@ class TaskController
             Task::deleteTaskById($id);
 
             // Перенаправляем пользователя
-            header("Location: /cabinet/index");
+            header("Location: /cabinet");
         }
 
         // Подключаем вид

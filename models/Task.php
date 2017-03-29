@@ -3,7 +3,8 @@
 class Task
 {
 
-    public static function getTasks(){
+    public static function getTasks()
+    {
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -23,7 +24,9 @@ class Task
         }
         return $tasks;
     }
-    public static function getTasksByUser($userid){
+
+    public static function getTasksByUser($userid)
+    {
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -46,7 +49,9 @@ class Task
         }
         return $userTasks;
     }
-    public static function getTasksById($id){
+
+    public static function getTasksById($id)
+    {
         // Соединение с БД
         $db = Db::getConnection();
 
@@ -62,6 +67,7 @@ class Task
         // Получение и возврат результатов
         return $result->fetch();
     }
+
     public static function deleteTaskById($id)
     {
         // Соединение с БД
@@ -75,6 +81,7 @@ class Task
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
     }
+
     public static function updateTaskById($id, $options)
     {
         // Соединение с БД
@@ -101,12 +108,32 @@ class Task
         $result->bindParam(':complete', $options['complete'], PDO::PARAM_INT);
 
 
+        return $result->execute();
+    }
+
+    public static function updateTaskByIdComplete($id, $complete)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = "UPDATE task
+            SET 
+                complete = :complete
+                
+            WHERE id_task = :id";
+
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':complete', $complete, PDO::PARAM_INT);
+
 
         return $result->execute();
     }
 
-
-    public static function getTasksFromFile($path) {
+    public static function getTasksFromFile($path)
+    {
 
         //эти пометки ставит пользователь в файле перед каждой соответствующей строкой
         //задания разделяются пустой строкой (несколькими)
@@ -121,11 +148,11 @@ class Task
 
         if ($fp) {
 
-            $i=0;
+            $i = 0;
 
             //считать возможные пустые строки в начале файла
-            do {
-                $str = fgets($fp, 999);
+            do {	
+            	$str = fgets($fp, 999);
             } while (empty(trim($str)) && !feof($fp));
 
             //формирование массива с заданиями
@@ -133,24 +160,29 @@ class Task
                 $task_name = false;
                 $description = false;
                 $deadline = false;
+                //в базе данные хранятся в UTF-8, а .txt по-умолчанию сохраняется в другой кодировке
+                //$str = iconv('cp1251', 'UTF-8', $str);
 
+                //в базе данные хранятся в UTF-8, а .txt по-умолчанию сохраняется в другой кодировке
                 //считывать до пустой строки (до конца задания)
                 do {
+                    $str = iconv('cp1251', 'UTF-8', $str);
                     //если найдена в строке пометка, 
                     //остается только текст после нее (значение) до конца строки 
                     //и записывается под соответствующим ключем
-                    if (preg_match("/" . $patternTask . "/",$str)) {
+                    if (preg_match("/" . $patternTask . "/", $str)) {
                         $task_name = str_replace($patternTask, "", stristr($str, $patternTask));
                     } else {
-                        if (preg_match("/" . $patternDescription . "/",$str)) {
+                        if (preg_match("/" . $patternDescription . "/", $str)) {
                             $description = str_replace($patternDescription, "", stristr($str, $patternDescription));
                         } else {
-                            if (preg_match("/" . $patternDeadline . "/",$str)) {
+                            if (preg_match("/" . $patternDeadline . "/", $str)) {
                                 $deadline = str_replace($patternDeadline, "", stristr($str, $patternDeadline));
                             }
                         }
                     }
                     $str = fgets($fp, 999);
+                    //$str = iconv('cp1251', 'UTF-8', $str);
                 } while (!empty(trim($str)));
 
                 //значение task_name обязательно, остальные - нет
@@ -173,7 +205,8 @@ class Task
     }
 
 
-    public static function addTasks($tasks) {
+    public static function addTasks($tasks)
+    {
         $db = Db::getConnection();
 
         //используется принцип подготовленных значений чтобы избежать sql-инъекций
@@ -182,27 +215,27 @@ class Task
         $valuesArray = [];
 
         foreach ($tasks as $key => $item) {
-            $valuesArray[] = '(:task_name'.$key.',:description'.$key.',:deadline'.$key.')';
+            $valuesArray[] = '(:task_name' . $key . ',:description' . $key . ',:deadline' . $key . ')';
         }
         if (!empty($valuesArray)) {
             $valuesForQuery = implode(',', $valuesArray);
 
             //формирование запроса
             $sql = 'INSERT INTO `task` (`task_name`, `description`, `deadline`) '
-            . 'VALUES ' . $valuesForQuery;
+                . 'VALUES ' . $valuesForQuery;
         }
-        
+
         $result = $db->prepare($sql);
 
         //заполнение подготовленных значений
         foreach ($tasks as $key => $item) {
-            $result->bindParam(':task_name'.$key, $item['task_name'], PDO::PARAM_STR);
-            $result->bindParam(':description'.$key, $item['description'], PDO::PARAM_STR);
-            $result->bindParam(':deadline'.$key, $item['deadline'], PDO::PARAM_STR);
+            $result->bindParam(':task_name' . $key, $item['task_name'], PDO::PARAM_STR);
+            $result->bindParam(':description' . $key, $item['description'], PDO::PARAM_STR);
+            $result->bindParam(':deadline' . $key, $item['deadline'], PDO::PARAM_STR);
         }
 
         //$numberInsertedTasks = 0;
-        
+
         if ($result->execute()) {
             return true;
         } else {
@@ -215,16 +248,17 @@ class Task
         //return $numberInsertedTasks;
     }
 
-    public static function addTask($task) {
+    public static function addTask($task)
+    {
         $db = Db::getConnection();
 
         $sql = 'INSERT INTO `task` (`task_name`, `description`, `deadline`) '
             . 'VALUES (:task_name, :description, :deadline)';
         $result = $db->prepare($sql);
-        
+
         $result->bindParam(':task_name', $task['task_name'], PDO::PARAM_STR);
         $result->bindParam(':description', $task['description'], PDO::PARAM_STR);
-        $result->bindParam(':deadline', $task['deadline'], PDO::PARAM_STR);  
+        $result->bindParam(':deadline', $task['deadline'], PDO::PARAM_STR);
 
         if ($result->execute()) {
             return true;

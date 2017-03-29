@@ -17,7 +17,6 @@ class CabinetController
 
         // Получаем информацию о пользователе из БД
         $user = User::getUserById($userId);
-
         $tasks = Task::getTasks();
         $userTasks = Task::getTasksByUser($userId);
         // Подключаем вид

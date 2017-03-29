@@ -195,4 +195,20 @@ class User
             die('Access denied');
         }
     }
+    public static function checkTeamlead()
+    {
+        // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
+        $userId = User::checkLogged();
+
+        // Получаем информацию о текущем пользователе
+        $user = User::getUserById($userId);
+
+        // Если роль текущего пользователя пускаем его
+        if ($user['role'] == '1' || $user['role'] == '0') {
+            return true;
+        }
+
+        // Иначе завершаем работу с сообщением об закрытом доступе
+        die('Access denied');
+    }
 }

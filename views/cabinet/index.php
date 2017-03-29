@@ -28,7 +28,6 @@
                 <thead>
                 <tr>
                     <th>Task name</th>
-                    <th>Description</th>
                     <?php if ($_SESSION['role'] != 2): ?>
                         <th>Dev name</th>
                     <?php endif; ?>
@@ -42,42 +41,44 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php if ($_SESSION['role'] == 2): ?>
                 <?php if (!empty($userTasks)): ?>
-                    <?php if ($_SESSION['role'] == 2): ?>
                         <?php foreach ($userTasks as $task): ?>
                             <tr>
                                 <th><a href="/task/index/<?php echo $task['id_task']; ?>" title="Редактировать"><?= $task['task_name'] ?></a></th>
-                                <th><?= $task['description'] ?></th>
                                 <th><?= $task['deadline'] ?></th>
-                                <th><?= $task['complete'] ?></th>
+                                <th><input type="checkbox" data-id="<?php echo $task['id_task']; ?>" id="<?php echo $task['id_task']; ?>" <?php if ($task['complete'] == 1) echo ' checked="checked"'; ?>  />
+                                    <label for="<?php echo $task['id_task']; ?>"></label>
+                                </th>
 
 
                             </tr>
                         <?php endforeach; ?>
-                    <?php endif; ?>
                     <?php else: ?>
-                    <tr>
-                        <th colspan="5"><p>Заданий нет, сегодня свободен</p></th>
-                    </tr>
+                        <tr>
+                            <th colspan="5"><p>Заданий нет, сегодня свободен</p></th>
+                        </tr>
+                    <?php endif; ?>
                 <?php endif; ?>
+                <?php if ($_SESSION['role'] != 2): ?>
                 <?php if (!empty($tasks)): ?>
-                    <?php if ($_SESSION['role'] != 2): ?>
                         <?php foreach ($tasks as $task): ?>
                             <tr>
                                 <th><a href="/task/index/<?php echo $task['id_task']; ?>" title="Редактировать"><?= $task['task_name'] ?></a></th>
-                                <th><?= $task['description'] ?></th>
                                 <th><?= $task['user_id'] ?></th>
                                 <th><?= $task['deadline'] ?></th>
-                                <th><?= $task['complete'] ?></th>
+                                <th><input type="checkbox" data-id="<?php echo $task['id_task']; ?>" id="<?php echo $task['id_task']; ?>" <?php if ($task['complete'] == 1) echo ' checked="checked"'; ?> />
+                                    <label for="<?php echo $task['id_task']; ?>"></label>
+                                </th>
                                 <th><a href="/task/update/<?php echo $task['id_task']; ?>" title="Редактировать"><i class="fa fa-pencil-square-o"></i></a></th>
                                 <th><a href="/task/delete/<?php echo $task['id_task']; ?>" title="Удалить"><i class="fa fa-times"></i></a></th>
                             </tr>
                         <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <th colspan="6"><p>Простой рабов - не рентабельно, срочно нужны новые проекты!</p></th>
+                        </tr>
                     <?php endif; ?>
-                <?php else: ?>
-                    <tr>
-                        <th colspan="6"><p>Простой рабов - не рентабельно, срочно нужны новые проекты!</p></th>
-                    </tr>
                 <?php endif; ?>
                 </tbody>
             </table>
