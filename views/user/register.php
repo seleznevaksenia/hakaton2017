@@ -19,7 +19,7 @@
 
                     <div class="signup-form"><!--sign up form-->
                         <h2>Регистрация</h2>
-                        <form method="post" action="#">
+                        <form method="post" action="">
                             <div class="input-field">
                                 <input type="text" class="form-control" id="firstName" name="name"
                                        value="<?php echo $name; ?>">
