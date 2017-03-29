@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     $("#new").click();
     $('#datetimepicker1').datetimepicker({
-        format: 'YYYY-MM-DD kk:mm:ss'
+        format: 'YYYY-MM-DD HH:mm'
 
     });
     $('select').material_select();

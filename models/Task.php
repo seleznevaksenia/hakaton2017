@@ -160,12 +160,11 @@ class Task
                 $task_name = false;
                 $description = false;
                 $deadline = false;
-                //в базе данные хранятся в UTF-8, а .txt по-умолчанию сохраняется в другой кодировке
-                //$str = iconv('cp1251', 'UTF-8', $str);
 
                 //в базе данные хранятся в UTF-8, а .txt по-умолчанию сохраняется в другой кодировке
                 //считывать до пустой строки (до конца задания)
                 do {
+                    //в базе данные хранятся в UTF-8, а .txt по-умолчанию сохраняется в другой кодировке
                     $str = iconv('cp1251', 'UTF-8', $str);
                     //если найдена в строке пометка, 
                     //остается только текст после нее (значение) до конца строки 
@@ -177,12 +176,11 @@ class Task
                             $description = str_replace($patternDescription, "", stristr($str, $patternDescription));
                         } else {
                             if (preg_match("/" . $patternDeadline . "/", $str)) {
-                                $deadline = str_replace($patternDeadline, "", stristr($str, $patternDeadline));
+                                $deadline = str_replace($patternDeadline, "", stristr($str . ':00', $patternDeadline));
                             }
                         }
                     }
                     $str = fgets($fp, 999);
-                    //$str = iconv('cp1251', 'UTF-8', $str);
                 } while (!empty(trim($str)));
 
                 //значение task_name обязательно, остальные - нет
