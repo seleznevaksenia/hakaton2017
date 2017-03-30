@@ -15,15 +15,6 @@
 <script type="text/javascript" src="/template/js/moment.js"></script>
 <script type="text/javascript" src="/template/js/bootstrap-datetimepicker.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $("#new").click();
-        $('#datetimepicker1').datetimepicker({
-        	format: 'YYYY-MM-DD kk:mm:ss'
-        });
-    });
-</script>
-
 
 
 </body>

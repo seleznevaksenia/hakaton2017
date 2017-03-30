@@ -19,37 +19,19 @@
                                    value="<?= $task['task_name'] ?>">
                             <label for="task_name">Название</label>
                         </div>
+
                         <div class="input-field">
-                            <input type="text" class="form-control" id="description" name="description"
-                                   value="<?= $task['description'] ?>">
+                            <textarea class="materialize-textarea" id="description" name="description"><?= $task['description'] ?></textarea>
                             <label for="description">Описание</label>
                         </div>
+
                         <label for="deadline">Дедлайн</label>
                         <div class='input-group date' id='datetimepicker1'>
                             <input type='text' class="form-control" name="deadline" id="deadline"
                                    value="<?= $task['deadline'] ?>"/>
                             <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-                        </div>
-                        <div class="input-field">
-                           <!-- <input type="text" class="form-control" id="user_id" name="user_id"-->
-                            <select id="user_id" >
-                                <option value="null">Выберети число</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                                  <!-- value="<?/*= $task['user_id'] */?>"">-->
-                            <label for="user_id">Разработчик</label>
-                        </div>
-                        <div class="input-field s12">
-                            <select name="complete">
-                                <option value="1" <?php if ($task['complete'] == 1) echo ' selected="selected"'; ?> >Готово
-                                </option>
-                                <option value="0" <?php if ($task['complete'] == 0) echo ' selected="selected"'; ?> >Не готово</option>
-                            </select>
-                            <label>Статус</label>
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
 
                         <div class="form-group">

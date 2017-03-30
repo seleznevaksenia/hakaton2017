@@ -92,9 +92,7 @@ class Task
             SET 
                 task_name = :task_name, 
                 description = :description, 
-                user_id = :user_id, 
-                deadline = :deadline, 
-                complete = :complete
+                deadline = :deadline
                 
             WHERE id_task = :id";
 
@@ -103,9 +101,8 @@ class Task
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':task_name', $options['task_name'], PDO::PARAM_STR);
         $result->bindParam(':description', $options['description'], PDO::PARAM_STR);
-        $result->bindParam(':user_id', $options['user_id'], PDO::PARAM_INT);
         $result->bindParam(':deadline', $options['deadline'], PDO::PARAM_STR);
-        $result->bindParam(':complete', $options['complete'], PDO::PARAM_INT);
+
 
 
         return $result->execute();

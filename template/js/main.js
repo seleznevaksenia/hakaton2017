@@ -13,8 +13,6 @@ $(document).ready(function () {
         format: 'YYYY-MM-DD HH:mm'
 
     });
-    $('select').material_select();
-
 
     $(":checkbox").change(function(){
         var id = $(this).attr("data-id");

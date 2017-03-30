@@ -3,7 +3,9 @@
     <section class="main">
         <div class="container">
             <div class="row">
-                <img src="/template/images/404/404_image.png" alt="" height="350">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <img src="/template/images/404/404_image.png" alt="" height="350">
+                </div>
             </div>
         </div>
     </section>

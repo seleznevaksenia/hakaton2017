@@ -49,8 +49,7 @@ class TaskController
             $options['task_name'] = $_POST['task_name'];
             $options['description'] = $_POST['description'];
             $options['deadline'] = $_POST['deadline'];
-            $options['user_id'] = $_POST['user_id'];
-            $options['complete'] = $_POST['complete'];
+
 
             // Сохраняем изменения
             Task::updateTaskById($id, $options);
