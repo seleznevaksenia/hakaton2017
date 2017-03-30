@@ -7,7 +7,7 @@
             <div class="col-sm-6 col-sm-offset-3 padding-right">
                 
                 <?php if ($result): ?>
-                    <p>Данные отредактированы!</p>
+                    <p class="edittitle">Данные отредактированы!</p>
                 <?php else: ?>
                     <?php if (isset($errors) && is_array($errors)): ?>
                         <ul>
