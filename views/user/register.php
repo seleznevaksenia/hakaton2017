@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-sm-5 col-sm-offset-4 padding-right">
+                <div class="container">
 
                     <?php if ($result): ?>
                         <p>Вы зарегистрированы!</p>
@@ -61,7 +61,7 @@
                 </div>
                 <br/>
                 <div class="form-group">
-                    <div class="col-xs-offset-2 col-xs-5">
+                    <div class="container textcenter">
                         <input type="submit" name="submit" class="btn btn-primary" value="Регистрация">
                     </div>
                 </div>

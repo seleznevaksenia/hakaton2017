@@ -50,6 +50,16 @@ h1, h2, h3, h4, h5, h6 {
 h2{
     color:#00acc1;
 }
+h4{
+    color:#00acc1;
+}
+.edittitle{
+    font-size: 22px;
+    color: #00C853;
+}
+.textcenter{
+    text-align: center;
+}
 
 .btn:hover, 
 .btn:focus{
