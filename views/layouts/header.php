@@ -12,7 +12,11 @@
         <link href="/template/css/materialize.min.css" rel="stylesheet">
         <link href="/template/css/main.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="/template/css/bootstrap-datetimepicker.min.css" >
+        <script src="/template/js/jquery.js"></script>
+        <script src="/template/js/materialize.min.js"></script>
+        <script src="/template/js/main.js"></script>
+
+        <link rel="stylesheet" href="/template/css/bootstrap-datetimepicker.min.css" />
     </head><!--/head-->
 
     <body>
@@ -36,11 +40,11 @@
                                 <div class="shop-menu pull-right">
                                     <ul class="nav navbar-nav">
                                         <?php if (User::isGuest()): ?>
-                                            <li><a href="/user/login"><i class="fa fa-lock"></i> Вход</a></li>
-                                            <li><a href="/user/register"><i class="fa fa-registered"></i> Регистрация</a></li>
+                                            <li><a href="/user/login/"><i class="fa fa-lock"></i> Вход</a></li>
+                                            <li><a href="/user/register/"><i class="fa fa-registered"></i> Регистрация</a></li>
                                         <?php else: ?>
-                                            <li><a href="/cabinet"><i class="fa fa-user"></i> Аккаунт</a></li>
-                                            <li><a href="/user/logout"><i class="fa fa-unlock"></i> Выход</a></li>
+                                            <li><a href="/cabinet/"><i class="fa fa-user"></i> Аккаунт</a></li>
+                                            <li><a href="/user/logout/"><i class="fa fa-unlock"></i> Выход</a></li>
                                         <?php endif; ?>
                                     </ul>
                                 </div>

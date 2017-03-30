@@ -33,8 +33,14 @@
             </span>
                         </div>
                         <div class="input-field">
-                            <input type="text" class="form-control" id="user_id" name="user_id"
-                                   value="<?= $task['user_id'] ?>"">
+                           <!-- <input type="text" class="form-control" id="user_id" name="user_id"-->
+                            <select id="user_id" >
+                                <option value="null">Выберети число</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                                  <!-- value="<?/*= $task['user_id'] */?>"">-->
                             <label for="user_id">Разработчик</label>
                         </div>
                         <div class="input-field s12">

@@ -8,6 +8,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^(.*)$ index.php
 
+
+
 # Попробуйте эту настройку .htaccess, если у Вас возникли проблемы с отображением
 # стилей css
 #AddDefaultCharset cp-1251
